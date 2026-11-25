@@ -162,8 +162,8 @@
   <!-- 顶部标题区 -->
   <div class="header-container">
     <div class="header-small">XI'AN JIAOTONG UNIVERSITY · SCHOOL OF MATHEMATICS AND STATISTICS</div>
-    <h1 class="header-title">宇树机器人强化学习源码精读笔记</h1>
-    <div class="header-subtitle">Research Notes on Unitree RL-Gym</div>
+    <h1 class="header-title">Unitree 机器人强化学习源码精读与学习平台</h1>
+    <div class="header-subtitle">Research Platform on Unitree RL-Gym</div>
     <div class="header-author">作者：田淞文 | 西安交通大学 数学与统计学院</div>
   </div>
 
