@@ -1,3 +1,162 @@
+<style>
+/* 针对首页的专属样式，绝对不影响全局，绝对安全 */
+.index-page {
+  font-family: "Times New Roman", "SimSun", "Songti SC", serif;
+}
+.index-page .header-container {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+}
+.index-page .header-small {
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.index-page .header-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--dark);
+}
+.index-page .header-subtitle {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: #f97316; /* 橙色 */
+  margin-bottom: 1.5rem;
+}
+.index-page .header-author {
+  font-size: 1rem;
+  color: var(--darkgray);
+}
+.index-page .about-card, .index-page .author-card {
+  background: rgba(128, 128, 128, 0.05);
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+.index-page .about-card {
+  border-left: 4px solid #f97316;
+}
+.index-page .card-title-accent {
+  color: #f97316;
+  font-family: sans-serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.index-page .card-title {
+  font-family: sans-serif;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+}
+.index-page .tags-container {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.index-page .tag {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+  border-radius: 4px;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+.index-page .contents-title {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #f97316;
+  padding-bottom: 10px;
+}
+.index-page .contents-title h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+.index-page .grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 800px) {
+  .index-page .grid-container { grid-template-columns: 1fr; }
+}
+.index-page .grid-item {
+  display: block;
+  background: rgba(128, 128, 128, 0.05);
+  border: 1px solid var(--lightgray);
+  border-left: 4px solid #f97316;
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.index-page .grid-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #f97316;
+}
+.index-page .section-num {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #f97316;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.index-page .card-desc {
+  font-size: 0.95rem;
+  color: var(--darkgray);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.index-page .card-keywords {
+  font-size: 0.85rem;
+  color: var(--gray);
+  font-style: italic;
+}
+.index-page .author-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 1fr;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+@media (max-width: 600px) {
+  .index-page .author-grid { grid-template-columns: 80px 1fr; }
+}
+.index-page .author-label {
+  color: #f97316;
+  font-weight: 600;
+}
+.index-page .author-value {
+  color: var(--darkgray);
+}
+.index-page .author-value a {
+  color: var(--darkgray);
+  text-decoration: underline;
+}
+.index-page .author-value a:hover {
+  color: #f97316;
+}
+.index-page .custom-footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--lightgray);
+  color: var(--gray);
+  font-size: 0.85rem;
+  font-family: sans-serif;
+  line-height: 1.8;
+}
+</style>
+
 <div class="index-page">
 
   <!-- 顶部标题区 -->
