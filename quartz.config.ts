@@ -13,7 +13,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "zh-CN",
-    baseUrl: "sosiristseng.github.io/template-quartz",
+    baseUrl: "shini-chi33.github.io/unitree-rl-gym-study",
     ignorePatterns: ["private", "_templates", ".obsidian"],
     defaultDateType: "created",
     theme: {
