@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Unitree 机器人强化学习源码精读与学习平台",
+    pageTitle: "Welcome",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
