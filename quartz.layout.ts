@@ -51,14 +51,13 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.ConditionalRender({
-      component: Component.DesktopOnly(
-        Component.Explorer({
-          filterFn: explorerFilter,
-        }),
-      ),
-      condition: notHome,
-    }),
+    Component.DesktopOnly(
+      Component.Explorer({
+        title: "学习目录",
+        filterFn: (node) =>
+          !["tags", "index", "home"].includes(node.slugSegment),
+      }),
+    ),
   ],
   right: [
     Component.ConditionalRender({
