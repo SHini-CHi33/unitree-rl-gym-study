@@ -1,7 +1,7 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// 过滤首页和 Home 导航项
+// 过滤 Explorer 中的 index、home 和 tags
 const explorerFilter = (node: { slugSegment: string }) => {
   return (
     node.slugSegment !== "tags" &&
@@ -10,43 +10,73 @@ const explorerFilter = (node: { slugSegment: string }) => {
   )
 }
 
+// 判断当前页面是否不是首页
+const notHome = ({ fileData }: { fileData: { slug?: string } }) =>
+  fileData.slug !== "index"
+
 // 全站共享组件
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   afterBody: [],
   footer: Component.Footer({
-    links: {},
+    links: {
+      GitHub: "https://github.com/SHini-CHi33/unitree-rl-gym-study",
+    },
   }),
 }
 
 // 普通笔记页面
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
-    Component.Breadcrumbs(),
-    Component.ArticleTitle(),
-    Component.ContentMeta(),
-    Component.TagList(),
+    Component.ConditionalRender({
+      component: Component.Breadcrumbs(),
+      condition: notHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.ArticleTitle(),
+      condition: notHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.ContentMeta(),
+      condition: notHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.TagList(),
+      condition: notHome,
+    }),
   ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(
-      Component.Explorer({
-        filterFn: explorerFilter,
-      }),
-    ),
+    Component.ConditionalRender({
+      component: Component.DesktopOnly(
+        Component.Explorer({
+          filterFn: explorerFilter,
+        }),
+      ),
+      condition: notHome,
+    }),
   ],
   right: [
-    Component.Graph(),
-    Component.DesktopOnly(Component.TableOfContents()),
-    Component.Backlinks(),
+    Component.ConditionalRender({
+      component: Component.Graph(),
+      condition: notHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.DesktopOnly(Component.TableOfContents()),
+      condition: notHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.Backlinks(),
+      condition: notHome,
+    }),
   ],
 }
 
-// 文件夹及列表页面
+// 文件夹和列表页面
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [
     Component.Breadcrumbs(),

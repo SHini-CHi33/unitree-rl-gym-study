@@ -20,9 +20,7 @@ body[data-slug="index"] .center > hr {
 body[data-slug="index"] .page-footer {
   display: none !important;
 }
-body[data-slug="index"] footer {
-  display: none !important;
-}
+
 
 /* 首页左上角项目名称取消点击效果 */
 body[data-slug="index"] .left .page-title a {
