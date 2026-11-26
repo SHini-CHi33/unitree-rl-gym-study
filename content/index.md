@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Unitree 机器人强化学习源码精读与学习平台"
 ---
 
 <style>
@@ -7,20 +7,16 @@ title: ""
    Unitree RL-Gym Study - Homepage
    ========================================== */
 
-/* 仅首页隐藏 Quartz 默认文章信息 */
-body[data-slug="index"] .page-header {
+/* 首页隐藏 Quartz 自动生成的内容 */
+body[data-slug="index"] .breadcrumb-container,
+body[data-slug="index"] .article-title,
+body[data-slug="index"] .content-meta,
+body[data-slug="index"] .tags,
+body[data-slug="index"] .sidebar.right,
+body[data-slug="index"] .page-footer,
+body[data-slug="index"] footer {
   display: none !important;
 }
-body[data-slug="index"] .sidebar.right {
-  display: none !important;
-}
-body[data-slug="index"] .center > hr {
-  display: none !important;
-}
-body[data-slug="index"] .page-footer {
-  display: none !important;
-}
-
 
 /* 首页左上角项目名称取消点击效果 */
 body[data-slug="index"] .left .page-title a {
@@ -208,7 +204,27 @@ body[data-slug="index"] .left .page-title a {
   overflow-wrap: anywhere;
 }
 
-/* 页脚 */
+/* GitHub 和个人主页链接 */
+.index-page .author-value a {
+  color: var(--darkgray);
+  text-decoration: underline;
+  text-decoration-color: rgba(249, 115, 22, 0.5);
+  text-underline-offset: 4px;
+  transition: color 0.2s;
+}
+.index-page .author-value a:hover {
+  color: #f97316;
+}
+
+/* 兴趣领域横跨剩余列 */
+.index-page .author-label-wide {
+  grid-column: 1;
+}
+.index-page .author-value-wide {
+  grid-column: 2 / -1;
+}
+
+/* 自定义页脚 */
 .index-page .custom-footer {
   text-align: center;
   margin-top: 4rem;
@@ -245,7 +261,14 @@ body[data-slug="index"] .left .page-title a {
   .index-page .author-grid {
     grid-template-columns: 80px minmax(0, 1fr);
   }
+  .index-page .author-value-wide {
+    grid-column: 2;
+  }
 }
+
+/* ==========================================
+   HTML 正文
+   ========================================== */
 </style>
 <div class="index-page">
 <div class="header-container">
@@ -314,9 +337,11 @@ body[data-slug="index"] .left .page-title a {
 <div class="author-label">单位：</div>
 <div class="author-value">西安交通大学 / 数学与统计学院</div>
 <div class="author-label">GitHub：</div>
-<div class="author-value">SHini-CHi33</div>
-<div class="author-label">兴趣领域：</div>
-<div class="author-value">Embodied AI & AI Agent & Reinforcement Learning</div>
+<div class="author-value"><a href="https://github.com/SHini-CHi33" target="_blank" rel="noopener noreferrer">SHini-CHi33</a></div>
+<div class="author-label">个人主页：</div>
+<div class="author-value"><a href="https://shini-chi33.github.io/" target="_blank" rel="noopener noreferrer">访问个人主页</a></div>
+<div class="author-label author-label-wide">兴趣领域：</div>
+<div class="author-value author-value-wide">Embodied AI & AI Agent & Reinforcement Learning</div>
 </div>
 </div>
 <div class="custom-footer">
