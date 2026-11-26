@@ -1,7 +1,16 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// components shared across all pages
+// 过滤首页和 Home 导航项
+const explorerFilter = (node: { slugSegment: string }) => {
+  return (
+    node.slugSegment !== "tags" &&
+    node.slugSegment !== "index" &&
+    node.slugSegment !== "home"
+  )
+}
+
+// 全站共享组件
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
@@ -11,7 +20,7 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
-// components for pages that display a single page (e.g. a single note)
+// 普通笔记页面
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.Breadcrumbs(),
@@ -24,7 +33,11 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(
+      Component.Explorer({
+        filterFn: explorerFilter,
+      }),
+    ),
   ],
   right: [
     Component.Graph(),
@@ -33,15 +46,23 @@ export const defaultContentPageLayout: PageLayout = {
   ],
 }
 
-// components for pages that display lists of pages  (e.g. tags or folders)
+// 文件夹及列表页面
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [
+    Component.Breadcrumbs(),
+    Component.ArticleTitle(),
+    Component.ContentMeta(),
+  ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.DesktopOnly(Component.Explorer()),
+    Component.DesktopOnly(
+      Component.Explorer({
+        filterFn: explorerFilter,
+      }),
+    ),
   ],
   right: [],
 }
