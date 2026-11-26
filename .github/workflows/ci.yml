@@ -1,4 +1,3 @@
-
 name: Deploy to GitHub pages
 
 concurrency:
@@ -24,16 +23,28 @@ jobs:
           submodules: 'true'
           fetch-depth: 0
 
-      # 复制配置、笔记和个人 Logo
+      # 复制配置文件、笔记和个人图标
       - name: Apply configurations
         run: |
-          cp quartz.config.ts quartz.layout.ts quartz
+          cp quartz.config.ts quartz
+          cp quartz.layout.ts quartz
           cp -rf content/* quartz/content/
 
-          # 将父仓库中的 Logo 临时复制到 Quartz 子模块
-          mkdir -p quartz/static
-          cp site-assets/icon.png quartz/static/icon.png
+          # 检查父仓库中的个人图标
+          test -f site-assets/icon.png
 
+          # 将个人图标复制到 Quartz
+          mkdir -p quartz/static
+          cp -f site-assets/icon.png quartz/static/icon.png
+
+          # 验证复制结果
+          echo "Checking source and Quartz icon..."
+          sha256sum site-assets/icon.png quartz/static/icon.png
+          cmp site-assets/icon.png quartz/static/icon.png
+
+          echo "Source icon copied successfully!"
+
+      # 配置 Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -41,20 +52,46 @@ jobs:
           cache: 'npm'
           cache-dependency-path: quartz/package-lock.json
 
+      # 安装依赖
       - name: Install Node.js dependencies
         working-directory: quartz
         run: npm ci --omit=dev
 
+      # 构建网站
       - name: Build website
         run: npx quartz build
         working-directory: quartz
 
+      # 构建完成后，强制确保最终发布目录使用个人图标
+      - name: Ensure custom icon in final output
+        shell: bash
+        run: |
+          # 确保最终目录存在
+          mkdir -p quartz/public/static
+
+          # 覆盖最终发布目录中的图标
+          cp -f site-assets/icon.png quartz/public/static/icon.png
+
+          # 输出两张图片的 SHA256
+          echo "Comparing source and published icons:"
+          sha256sum site-assets/icon.png quartz/public/static/icon.png
+
+          # 逐字节比较，确保图片完全一致
+          cmp site-assets/icon.png quartz/public/static/icon.png
+
+          echo "Custom icon verified successfully!"
+
+          # 检查 Favicon 是否生成
+          test -f quartz/public/favicon.ico
+          echo "Favicon.ico generated successfully!"
+
+      # 上传构建产物
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: quartz/public
 
-  # Deployment job
+  # 部署到 GitHub Pages
   deploy:
     needs: build
     if: ${{ github.ref == 'refs/heads/main'}}
